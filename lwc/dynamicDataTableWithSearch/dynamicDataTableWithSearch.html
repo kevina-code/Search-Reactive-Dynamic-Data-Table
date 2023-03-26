@@ -1,0 +1,29 @@
+<template>
+  <lightning-card variant="Narrow" title={title} icon-name="standard:apps">
+    <div class="slds-p-horizontal_small">
+      <!-- multi select lookup -->
+      <c-multi-select-lookup
+        record-id={recordId}
+        obj-api-name={objApiName}
+        field-api-names={fieldApiNames}
+        where-clause={whereClause}
+        icon-name={iconName}
+        context="search results table"
+        record-limit="50"
+        onsearched={handleSearchedRecords}
+        placeholder="Lookup record..."
+      >
+      </c-multi-select-lookup>
+      <!-- dynamic data table -->
+      <template if:true={recordResultsLength}>
+        <c-dynamic-data-table
+          obj-api-name={objApiName}
+          field-api-names={fieldApiNames}
+          actions-str={actionsStr}
+          record-data={recordData}
+        >
+        </c-dynamic-data-table>
+      </template>
+    </div>
+  </lightning-card>
+</template>
