@@ -9,12 +9,6 @@ Search-reactive dynamic data table - object agnostic and easily configurable
 * Ability to display other fields (like Email and Phone for example) in the search results
 * Reusable - no need to edit the code, just adjust config parameters
 
-![image](https://user-images.githubusercontent.com/124932501/229316105-ae37e46f-f76a-4e92-b491-b78bfcac6127.png)
-
-![image](https://user-images.githubusercontent.com/124932501/229316126-d00f6f68-e621-4845-af72-7ff8e5543f89.png)
-
-![image](https://user-images.githubusercontent.com/124932501/229316134-97d17df6-678c-4c85-a8c9-7ec2324febff.png)
-
 Syntax:
 ```html
 <c-dynamic-data-table-with-search
@@ -32,3 +26,9 @@ Syntax:
    >
 </c-dynamic-data-table-with-search>
 ```
+
+![image](https://user-images.githubusercontent.com/124932501/229316105-ae37e46f-f76a-4e92-b491-b78bfcac6127.png)
+
+![image](https://user-images.githubusercontent.com/124932501/229316126-d00f6f68-e621-4845-af72-7ff8e5543f89.png)
+
+![image](https://user-images.githubusercontent.com/124932501/229316134-97d17df6-678c-4c85-a8c9-7ec2324febff.png)
