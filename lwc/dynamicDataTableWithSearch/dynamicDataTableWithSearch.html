@@ -5,22 +5,27 @@
       <c-multi-select-lookup
         record-id={recordId}
         obj-api-name={objApiName}
-        field-api-names={fieldApiNames}
+        field-paths={fieldPaths}
+        field-paths-for-search={fieldPathsForSearch}
         where-clause={whereClause}
         icon-name={iconName}
         context="search results table"
         record-limit="50"
+        placeholder="Lookup record(s)..."
         onsearched={handleSearchedRecords}
-        placeholder="Lookup record..."
       >
       </c-multi-select-lookup>
       <!-- dynamic data table -->
-      <template if:true={recordResultsLength}>
+      <template if:true={searchResultRecordsLength}>
         <c-dynamic-data-table
           obj-api-name={objApiName}
-          field-api-names={fieldApiNames}
+          field-paths={fieldPaths}
+          hide-checkbox-column={hideCheckboxColumn}
           actions-str={actionsStr}
           record-data={recordData}
+          has-loaded={hasLoaded}
+          linkified-columns={linkifiedColumns}
+          onrowstoggled={handleRowsToggled}
         >
         </c-dynamic-data-table>
       </template>

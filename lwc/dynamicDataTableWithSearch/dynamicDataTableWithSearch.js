@@ -7,28 +7,32 @@ import { LightningElement, api } from "lwc";
 
 export default class DynamicDataTableWithSearch extends LightningElement {
   @api recordId;
+  @api hasLoaded;
 
   // target configs:
   @api title;
   @api iconName;
   @api objApiName;
-  @api fieldApiNames;
+  @api fieldPaths;
+  @api fieldPathsForSearch;
   @api whereClause;
+  @api hideCheckboxColumn;
   @api actionsStr;
 
-  recordResults = [];
-  recordResultsLength;
+  searchResultRecordsLength;
   recordData = [];
+  linkifiedColumns = [];
+  selectedRows = [];
 
   handleSearchedRecords(event) {
-    this.recordResults = [...event.detail.searchResultRecords];
-    let tempRecList = [];
-    this.recordResults.forEach((record) => {
-      let tempRec = Object.assign({}, record);
-      tempRec.RecName = "/" + tempRec.Id;
-      tempRecList.push(tempRec);
-    });
-    this.recordData = tempRecList;
-    this.recordResultsLength = this.recordResults.length;
+    this.hasLoaded = false;
+    this.recordData = [...event.detail.searchResultRecords];
+    this.linkifiedColumns = [...event.detail.linkifiedColumns];
+    this.searchResultRecordsLength = this.recordData.length;
+    this.hasLoaded = true;
+  }
+
+  handleRowsToggled(event) {
+    this.selectedRows = event.detail.selectedRows;
   }
 }
