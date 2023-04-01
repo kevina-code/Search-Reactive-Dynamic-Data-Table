@@ -9,8 +9,26 @@ Search-reactive dynamic data table - object agnostic and easily configurable
 * Ability to display other fields (like Email and Phone for example) in the search results
 * Reusable - no need to edit the code, just adjust config parameters
 
-![image](https://user-images.githubusercontent.com/124932501/227801040-6db73a7e-cc25-4cee-ad1b-a3f435c2cf3c.png)
+![image](https://user-images.githubusercontent.com/124932501/229316105-ae37e46f-f76a-4e92-b491-b78bfcac6127.png)
 
-![image](https://user-images.githubusercontent.com/124932501/227801045-e8deb215-6945-4b81-a64a-f7a1486468e3.png)
+![image](https://user-images.githubusercontent.com/124932501/229316126-d00f6f68-e621-4845-af72-7ff8e5543f89.png)
 
-![image](https://user-images.githubusercontent.com/124932501/227801049-9442053d-d2d5-4f57-82ce-bdfa253c2729.png)
+![image](https://user-images.githubusercontent.com/124932501/229316134-97d17df6-678c-4c85-a8c9-7ec2324febff.png)
+
+Syntax:
+```html
+<c-dynamic-data-table-with-search
+    title="Contact lookup/selection"
+    icon-name="standard:contact"
+    obj-api-name="Contact"
+    field-paths="Id, Name, Phone, Email"
+    field-paths-for-search="Name, Email"
+    where-clause="AccountId = :recordId ORDER BY Name"
+    actions-str="view, edit"
+    hide-checkbox-column="false"
+    record-id={recordId}
+    placeholder="Lookup record..."
+    onrowstoggled={rowToggleHandler} <!-- name of your method to run when user toggles the checkbox on a row -->
+   >
+</c-dynamic-data-table-with-search>
+```
