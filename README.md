@@ -27,6 +27,9 @@ Syntax:
 </c-dynamic-data-table-with-search>
 ```
 
+https://user-images.githubusercontent.com/124932501/230435278-13fc8fe4-9339-49b7-91e0-f42725d43112.mp4
+
+
 ![image](https://user-images.githubusercontent.com/124932501/229316105-ae37e46f-f76a-4e92-b491-b78bfcac6127.png)
 
 ![image](https://user-images.githubusercontent.com/124932501/229316126-d00f6f68-e621-4845-af72-7ff8e5543f89.png)
