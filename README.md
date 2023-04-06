@@ -1,4 +1,4 @@
-# Search-Reactive-Dynamic-Data-Table
+# Search-Reactive-Dynamic-Data-Tablea
 Search-reactive dynamic data table - object agnostic and easily configurable
 * Leverages [lightning-datatable](https://developer.salesforce.com/docs/component-library/bundle/lightning-datatable/example)
 * Object-agnostic - can be used with any standard or custom object
