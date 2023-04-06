@@ -1,4 +1,4 @@
-# Search-Reactive-Dynamic-Data-Tablea
+# Search-Reactive-Dynamic-Data-Table
 Search-reactive dynamic data table - object agnostic and easily configurable
 * Leverages [lightning-datatable](https://developer.salesforce.com/docs/component-library/bundle/lightning-datatable/example)
 * Object-agnostic - can be used with any standard or custom object
@@ -33,6 +33,10 @@ https://user-images.githubusercontent.com/124932501/230435278-13fc8fe4-9339-49b7
 
 ![image](https://user-images.githubusercontent.com/124932501/229316105-ae37e46f-f76a-4e92-b491-b78bfcac6127.png)
 
+--------------------------------
+
 ![image](https://user-images.githubusercontent.com/124932501/229316126-d00f6f68-e621-4845-af72-7ff8e5543f89.png)
+
+--------------------------------
 
 ![image](https://user-images.githubusercontent.com/124932501/229316134-97d17df6-678c-4c85-a8c9-7ec2324febff.png)
