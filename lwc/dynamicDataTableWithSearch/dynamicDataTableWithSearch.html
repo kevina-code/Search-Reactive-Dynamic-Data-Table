@@ -10,19 +10,24 @@
         where-clause={whereClause}
         icon-name={iconName}
         context="search results table"
-        record-limit="50"
+        record-limit="10"
         placeholder="Lookup record(s)..."
         onsearched={handleSearchedRecords}
+        oncellchanged={handleCellChange}
       >
       </c-multi-select-lookup>
       <!-- dynamic data table -->
-      <template if:true={searchResultRecordsLength}>
+      <template lwc:if={recordData.length}>
         <c-dynamic-data-table
           obj-api-name={objApiName}
           field-paths={fieldPaths}
           hide-checkbox-column={hideCheckboxColumn}
           actions-str={actionsStr}
+          suppress-bottom-bar={suppressBottomBar}
           record-data={recordData}
+          selected-row-ids={selectedRowIds}
+          col-header-to-field-api-name={colHeaderToFieldApiName}
+          col-header-to-field-type={colHeaderToFieldType}
           has-loaded={hasLoaded}
           linkified-columns={linkifiedColumns}
           onrowstoggled={handleRowsToggled}

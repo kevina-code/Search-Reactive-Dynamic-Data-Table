@@ -18,21 +18,32 @@ export default class DynamicDataTableWithSearch extends LightningElement {
   @api whereClause;
   @api hideCheckboxColumn;
   @api actionsStr;
+  @api suppressBottomBar;
 
-  searchResultRecordsLength;
   recordData = [];
   linkifiedColumns = [];
   selectedRows = [];
+  selectedRowIds = [];
+  saveDraftValues = [];
+  colHeaderToFieldApiName = {};
+  colHeaderToFieldType = {};
 
   handleSearchedRecords(event) {
-    this.hasLoaded = false;
     this.recordData = [...event.detail.searchResultRecords];
     this.linkifiedColumns = [...event.detail.linkifiedColumns];
-    this.searchResultRecordsLength = this.recordData.length;
-    this.hasLoaded = true;
+    this.colHeaderToFieldApiName = { ...event.detail.colHeaderToFieldApiName };
+    this.colHeaderToFieldType = { ...event.detail.colHeaderToFieldType };
+
+    const selectedRowIdsFromThisSearch = this.selectedRows.map((row) => row.Id);
+    const rowIds = this.selectedRowIds.concat(selectedRowIdsFromThisSearch);
+    this.selectedRowIds = [...new Set(rowIds)];
   }
 
   handleRowsToggled(event) {
-    this.selectedRows = event.detail.selectedRows;
+    this.selectedRows = [...event.detail.selectedRows];
+  }
+
+  handleCellChanged(event) {
+    this.saveDraftValues = [...event.detail.saveDraftValues];
   }
 }
