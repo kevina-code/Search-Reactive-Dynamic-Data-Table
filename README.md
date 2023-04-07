@@ -9,6 +9,8 @@ Search-reactive dynamic data table - object agnostic and easily configurable
 * Ability to display other fields (like Email and Phone for example) in the search results
 * Reusable - no need to edit the code, just adjust config parameters
 
+Deploy to salesforce: https://live.playg.app/play/reactive-dynamic-data-table
+
 Syntax:
 ```html
 <c-dynamic-data-table-with-search
