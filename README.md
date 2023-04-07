@@ -24,7 +24,7 @@ Syntax:
     hide-checkbox-column="false"
     record-id={recordId}
     placeholder="Lookup record..."
-    onrowstoggled={rowToggleHandler} <!-- name of your method to run when user toggles the checkbox on a row -->
+    onrowstoggled={rowToggleHandler}
    >
 </c-dynamic-data-table-with-search>
 ```
