@@ -25,14 +25,12 @@ export default class DynamicDataTableWithSearch extends LightningElement {
   selectedRows = [];
   selectedRowIds = [];
   saveDraftValues = [];
-  colHeaderToFieldApiName = {};
-  colHeaderToFieldType = {};
+  colHeaderMap = {};
 
   handleSearchedRecords(event) {
     this.recordData = [...event.detail.searchResultRecords];
     this.linkifiedColumns = [...event.detail.linkifiedColumns];
-    this.colHeaderToFieldApiName = { ...event.detail.colHeaderToFieldApiName };
-    this.colHeaderToFieldType = { ...event.detail.colHeaderToFieldType };
+    this.colHeaderMap = { ...event.detail.colHeaderMap };
 
     const selectedRowIdsFromThisSearch = this.selectedRows.map((row) => row.Id);
     const rowIds = this.selectedRowIds.concat(selectedRowIdsFromThisSearch);

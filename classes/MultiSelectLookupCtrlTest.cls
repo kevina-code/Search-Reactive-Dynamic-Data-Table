@@ -19,7 +19,7 @@ private class MultiSelectLookupCtrlTest {
     Test.startTest();
     List<RecordDataModels.RecordWrapper> wrappers = MultiSelectLookupCtrl.retrieveSearchData(
       'Account' /* objApiName */,
-      'Id, Name, AccountNumber' /* fieldPaths */,
+      'Id, Name, AccountNumber, Owner.UserRole.Name' /* fieldPaths */,
       'Name' /* fieldPathsForSearch */,
       'ABC' /* value */,
       new List<Id>{ accounts[1].Id } /* selectedRecordIds */,
@@ -28,8 +28,12 @@ private class MultiSelectLookupCtrlTest {
     );
     Test.stopTest();
 
-    Assert.isFalse(wrappers.isEmpty());
-    Assert.areEqual(wrappers[0].record.get('Name'), 'ABC Corp');
+    Assert.isFalse(wrappers.isEmpty(), 'Expected wrappers not to be empty');
+    Assert.areEqual(
+      wrappers[0].record.get('Name'),
+      'ABC Corp',
+      'Expected the first wrapper\'s record name to be "ABC Corp"'
+    );
   }
 
   @isTest
@@ -52,7 +56,10 @@ private class MultiSelectLookupCtrlTest {
         accounts[1].Id /* recordId */
       );
     } catch (Exception e) {
-      Assert.isTrue(e.getMessage().contains('Script-thrown exception'));
+      Assert.isTrue(
+        e.getMessage().contains('Script-thrown exception'),
+        'Expected exception message to contain "Script-thrown exception"'
+      );
     }
     Test.stopTest();
   }

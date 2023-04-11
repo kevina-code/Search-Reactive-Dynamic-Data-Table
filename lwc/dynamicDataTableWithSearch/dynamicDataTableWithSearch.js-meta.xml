@@ -2,88 +2,99 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>56.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>Dynamic Datatable with Search</masterLabel>
-    <description>Dynamic Datatable driven by search results</description>
+    <masterLabel>Dynamic Lightning Datatable with Search</masterLabel>
+    <description
+  >Search-reactive object-agnostic dynamic lightning datatable</description>
     <targets>
-        <target>lightning__RecordPage</target>
-        <target>lightning__FlowScreen</target>
+      <target>lightning__RecordPage</target>
+      <target>lightning__AppPage</target>
+      <target>lightning__HomePage</target>
+      <target>lightning__FlowScreen</target>
+      <target>lightningCommunity__Default</target>
+      <target>lightningCommunity__Page</target>
+      <target>lightningCommunity__Page_Layout</target>
     </targets>
     <targetConfigs>
-        <targetConfig targets="lightning__RecordPage">
-            <property
+        <targetConfig
+      targets="lightning__RecordPage, lightning__AppPage, lightning__HomePage, lightningCommunity__Default"
+    >
+          <property
         name="title"
         label="Title"
         type="String"
-        placeholder="Ex: Account Multi Select Lookup"
+        placeholder="Ex: Contact Multi Select Lookup"
         description="Enter the desired title of this instance of the component"
       />
-      <property
+    <property
         name="iconName"
         label="Icon Name"
         required="true"
+        default="standard:contact"
         type="String"
-        placeholder="Ex: standard:account"
+        placeholder="Ex: standard:contact"
         description="Enter the name of the icon to be used on the queried/selected records"
       />
-            <property
+          <property
         name="objApiName"
         label="Object API Name"
         required="true"
+        default="Contact"
         type="String"
-        placeholder="Ex: Account"
+        placeholder="Ex: Contact"
         description="Enter the object API Name"
         datasource="apex://ObjPicklist"
       />
-      <property
+    <property
         name="fieldPaths"
         type="String"
         required="true"
+        default="Id, Name"
         label="Fields and field paths for data table columns"
         placeholder="Ex: Id, Name, Phone, Email, Account.Name"
         description="Enter a comma delimited list of fields/paths to query and bind to data table columns"
       />
-      <property
+    <property
         name="fieldPathsForSearch"
         type="String"
-        default="Name"
         required="true"
+        default="Name"
         label="Fields and field paths to base search off of"
         placeholder="Ex: Name, Phone, Email"
         description="Enter a comma delimited list of fields/paths to base search off of (default is name)"
       />
-      <property
+    <property
         name="whereClause"
         type="String"
         label="Where Clause"
         placeholder="Examples: AccountId = :recordId; Name LIKE '%ABC%'; etc..."
         description="Optionally enter where clause to filter records. Do not include 'WHERE' in this field."
       />
-      <property
+    <property
         name="hideCheckboxColumn"
         type="Boolean"
         label="Hide Checkbox Column"
         description="Optionally hide the checkbox column in the data table"
       />
-      <property
+    <property
         name="actionsStr"
         type="String"
         label="Actions"
         placeholder="Ex: view, edit, delete"
         description="Optionally enter row actions to be added to the table"
       />
-      <property
+    <property
         name="suppressBottomBar"
         type="Boolean"
         label="Supress Bottom Bar"
         description="Optionally suppress the bottom bar that reveals the cancel and save button when a change is made to a cell"
       />
-        </targetConfig>
+      </targetConfig>
         <targetConfig targets="lightning__FlowScreen">
           <property
         name="title"
         label="Title"
         type="String"
-        placeholder="Ex: Account Multi Select Lookup"
+        placeholder="Ex: Contact Multi Select Lookup"
         description="Enter the desired title of this instance of the component"
       />
     <property
@@ -91,7 +102,7 @@
         label="Icon Name"
         required="true"
         type="String"
-        placeholder="Ex: standard:account"
+        placeholder="Ex: standard:contact"
         description="Enter the name of the icon to be used on the queried/selected records"
       />
           <property
@@ -99,7 +110,7 @@
         label="Object API Name"
         required="true"
         type="String"
-        placeholder="Ex: Account"
+        placeholder="Ex: Contact"
         description="Enter the object API Name"
       />
       <property

@@ -34,9 +34,14 @@ public class MultiSelectLookupCtrl {
       }
 
       if (String.isNotEmpty(value)) {
+        List<String> fieldPathsToQuery = getFieldPathsToQuery(
+          objApiName,
+          fieldPaths
+        );
+
         String queryStr = buildQueryString(
           objApiName,
-          fieldPaths,
+          fieldPathsToQuery,
           fieldPathsForSearch,
           value,
           selectedRecordIds,
@@ -44,7 +49,6 @@ public class MultiSelectLookupCtrl {
           recordId
         );
 
-        System.debug('queryStr: ' + queryStr);
         for (SObject record : Database.Query(queryStr)) {
           recordWrappers.add(
             new RecordDataModels.RecordWrapper(
@@ -74,7 +78,7 @@ public class MultiSelectLookupCtrl {
    */
   private static String buildQueryString(
     String objApiName,
-    String fieldPaths,
+    List<String> fieldPathsToQuery,
     String fieldPathsForSearch,
     String value,
     List<String> selectedRecordIds,
@@ -82,13 +86,14 @@ public class MultiSelectLookupCtrl {
     String recordId
   ) {
     String queryStr = 'SELECT Id, Name';
-    if (fieldPaths != null) {
-      for (String fieldPath : fieldPaths.split(',')) {
+    if (fieldPathsToQuery != null) {
+      for (String fieldPath : fieldPathsToQuery) {
+        fieldPath = fieldPath.trim();
         if (
-          fieldPath.trim().toUpperCase() != 'ID' &&
-          fieldPath.trim().toUpperCase() != 'NAME'
+          fieldPath.toUpperCase() != 'ID' &&
+          fieldPath.toUpperCase() != 'NAME'
         ) {
-          queryStr += ', ' + fieldPath.trim();
+          queryStr += ', ' + fieldPath;
         }
       }
     }
@@ -123,5 +128,53 @@ public class MultiSelectLookupCtrl {
       queryStr += ' LIMIT 10';
     }
     return queryStr;
+  }
+
+  /**
+   * @description: get field paths to query for data table\
+   * @param   objApiName            object api name to query
+   * @param   fieldPaths            comma delimited string of field paths specified in config
+   * @return  fieldPathsToQuery     a list of field paths to query
+   */
+  private static List<String> getFieldPathsToQuery(
+    String objApiName,
+    String fieldPaths
+  ) {
+    List<String> fieldPathsToQuery = new List<String>();
+    List<String> potentialRelFields = new List<String>(); // potential relationship fields (ex: AccountId)
+    for (String fieldPath : fieldPaths.split(',')) {
+      fieldPath = fieldPath.trim();
+      if (!fieldPath.contains('.')) {
+        potentialRelFields.add(fieldPath);
+      }
+      fieldPathsToQuery.add(fieldPath);
+    }
+    if (!potentialRelFields.isEmpty()) {
+      for (String field : potentialRelFields) {
+        Map<String, Schema.SObjectField> fieldMap = FieldUtils.getDynamicDescribe(
+            objApiName
+          )
+          .fields.GetMap();
+        System.debug('xxx field: ' + field);
+        if (
+          String.valueOf(fieldMap.get(field).getDescribe().getType()) ==
+          'REFERENCE'
+        ) {
+          String relObjApiName = fieldMap
+              .get(field)
+              .getDescribe()
+              .getReferenceTo()[0]
+            .getDescribe()
+            .getName();
+
+          relObjApiName = relObjApiName.replace('__c', '__r');
+          String additionalPath = relObjApiName + '.Name';
+          if (!fieldPathsToQuery.contains(additionalPath)) {
+            fieldPathsToQuery.add(additionalPath);
+          }
+        }
+      }
+    }
+    return fieldPathsToQuery;
   }
 }

@@ -9,6 +9,10 @@ import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import retrieveSearchData from "@salesforce/apex/MultiSelectLookupCtrl.retrieveSearchData";
 
+const linkIdDelimiter = "_^_";
+const linkLabelDelimiter = "^_^";
+const chDelimiter = "@_@";
+
 export default class MultiSelectLookup extends LightningElement {
   @api recordId;
   @api Label;
@@ -26,8 +30,7 @@ export default class MultiSelectLookup extends LightningElement {
   searchResultRecords = [];
   selectedRecords = [];
   linkifiedColumns = [];
-  colHeaderToFieldApiName = {};
-  colHeaderToFieldType = {};
+  colHeaderMap = {};
   selectedRows = [];
 
   doneTypingInterval = 300;
@@ -65,14 +68,12 @@ export default class MultiSelectLookup extends LightningElement {
 
         const searchResultRecords = this.searchResultRecords;
         const linkifiedColumns = this.linkifiedColumns;
-        const colHeaderToFieldApiName = this.colHeaderToFieldApiName;
-        const colHeaderToFieldType = this.colHeaderToFieldType;
+        const colHeaderMap = this.colHeaderMap;
         const searchedEvent = new CustomEvent("searched", {
           detail: {
             searchResultRecords,
             linkifiedColumns,
-            colHeaderToFieldApiName,
-            colHeaderToFieldType
+            colHeaderMap
           }
         });
         this.dispatchEvent(searchedEvent);
@@ -93,7 +94,9 @@ export default class MultiSelectLookup extends LightningElement {
         }
       })
       .catch((error) => {
-        console.log("-------multiSelectLookup error-------" + error);
+        console.log(
+          "-------multiSelectLookup searchField error-------" + error
+        );
         this.dispatchEvent(
           new ShowToastEvent({
             title: "Error retrieving search data",
@@ -119,15 +122,20 @@ export default class MultiSelectLookup extends LightningElement {
           )
         ) {
           const fieldProperty = recordWrapper.fieldPropertyMap[prop];
-          tempRec[fieldProperty.columnHeader] = fieldProperty.fieldValue;
-          this.colHeaderToFieldApiName[fieldProperty.columnHeader] =
-            fieldProperty.fieldApiName;
-          this.colHeaderToFieldType[fieldProperty.columnHeader] =
-            fieldProperty.fieldType;
+          tempRec[fieldProperty.columnHeader + chDelimiter] =
+            fieldProperty.fieldValue;
+          this.colHeaderMap[fieldProperty.columnHeader] = fieldProperty;
           if (fieldProperty.linkId) {
             this.linkifiedColumns.push(fieldProperty.columnHeader);
-            tempRec[fieldProperty.columnHeader] = "/" + fieldProperty.linkId;
-            tempRec[fieldProperty.linkLabel] = fieldProperty.fieldValue;
+            tempRec[fieldProperty.columnHeader + linkIdDelimiter] =
+              "/" + fieldProperty.linkId;
+            tempRec[fieldProperty.linkLabel + linkLabelDelimiter] =
+              fieldProperty.fieldValue;
+          }
+          if (fieldProperty.fieldType === "REFERENCE") {
+            const relObj = {};
+            relObj.Id = tempRec.Id;
+            relObj.Name = tempRec.Name;
           }
         }
       }
@@ -140,16 +148,33 @@ export default class MultiSelectLookup extends LightningElement {
 
   // handle when user types keys into search field
   handleKeyChange(event) {
-    // ignore unneeded keys like shift, ctrl, alt, etc
-    if ((event.keyCode <= 90 && event.keyCode >= 48) || event.keyCode === 8) {
-      this.isSearchLoading = true;
-      const searchKey = event.target.value;
-      clearTimeout(this.typingTimer);
-      this.typingTimer = setTimeout(() => {
-        this.searchField(searchKey);
-        this.isSearchLoading = false;
-        this.inputDisabled = false;
-      }, this.doneTypingInterval);
+    try {
+      // ignore unneeded keys like shift, ctrl, alt, etc
+      if (
+        (event.keyCode <= 90 && event.keyCode >= 48) ||
+        event.keyCode === 8 ||
+        event.keyCode === 27
+      ) {
+        this.isSearchLoading = true;
+        const searchKey = event.target.value;
+        clearTimeout(this.typingTimer);
+        this.typingTimer = setTimeout(() => {
+          this.searchField(searchKey);
+          this.isSearchLoading = false;
+          this.inputDisabled = false;
+        }, this.doneTypingInterval);
+      }
+    } catch (error) {
+      console.log(
+        "-------multiSelectLookup handleKeyChange error-------" + error
+      );
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "handleKeyChange error",
+          message: "multiSelectLookup.handleKeyChange error",
+          variant: "error"
+        })
+      );
     }
   }
 
@@ -177,7 +202,14 @@ export default class MultiSelectLookup extends LightningElement {
         }
       }
     } catch (error) {
-      console.log("MultiSelectLookup.toggleResult error: ", error);
+      console.log("-------multiSelectLookup toggleResult error-------" + error);
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Toggle result error",
+          message: "Toggle result error",
+          variant: "error"
+        })
+      );
     }
   }
 
@@ -230,7 +262,14 @@ export default class MultiSelectLookup extends LightningElement {
         this.dispatchEvent(selectedEvent);
       }
     } catch (error) {
-      console.log("MultiSelectLookup.removeRecord error: ", error);
+      console.log("-------multiSelectLookup removeRecord error-------" + error);
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Error removing records",
+          message: "Error removing records",
+          variant: "error"
+        })
+      );
     }
   }
 }
