@@ -8,6 +8,7 @@ Search-reactive dynamic data table - object agnostic and easily configurable
 * Ability to configure multiple search fields (not just Name) to bind to lookup search query
 * Ability to display other fields (like Email and Phone for example) in the search results
 * Reusable - no need to edit the code, just adjust config parameters
+* Also supports inline editing of picklist fields and lookup fields
 
 Deploy to salesforce: https://live.playg.app/play/reactive-dynamic-data-table
 
@@ -31,16 +32,21 @@ Syntax:
 
 --------------------------------
 
-https://user-images.githubusercontent.com/124932501/230435278-13fc8fe4-9339-49b7-91e0-f42725d43112.mp4
+https://user-images.githubusercontent.com/124932501/231553242-1c81fa8a-0aa0-420d-823e-29b865a2b726.mp4
 
 --------------------------------
 
-![image](https://user-images.githubusercontent.com/124932501/229316105-ae37e46f-f76a-4e92-b491-b78bfcac6127.png)
+![Dynamic DataTable with search config](https://user-images.githubusercontent.com/124932501/231553105-fd7e104b-0f0d-4efe-9b73-be5e9d174695.png)
 
 --------------------------------
 
-![image](https://user-images.githubusercontent.com/124932501/229316126-d00f6f68-e621-4845-af72-7ff8e5543f89.png)
+![Dynamic DataTable with search ex](https://user-images.githubusercontent.com/124932501/231553136-c85e3aef-e11e-4311-a24c-1d973890e66e.png)
 
 --------------------------------
 
-![image](https://user-images.githubusercontent.com/124932501/229316134-97d17df6-678c-4c85-a8c9-7ec2324febff.png)
+![Dynamic DataTable with search ex 2](https://user-images.githubusercontent.com/124932501/231553149-783be5ef-0444-427d-ae8a-133e3764e617.png)
+
+--------------------------------
+
+![Data Table with search flow config](https://user-images.githubusercontent.com/124932501/231553448-f767478f-c984-433f-b73a-d534103cb8fd.png)
+
