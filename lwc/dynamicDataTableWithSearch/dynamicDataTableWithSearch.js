@@ -7,7 +7,6 @@ import { LightningElement, api } from "lwc";
 
 export default class DynamicDataTableWithSearch extends LightningElement {
   @api recordId;
-  @api hasLoaded;
 
   // target configs:
   @api title;
@@ -19,6 +18,7 @@ export default class DynamicDataTableWithSearch extends LightningElement {
   @api hideCheckboxColumn;
   @api actionsStr;
   @api suppressBottomBar;
+  @api enforceAccessibleFls; // whether to enforce accessible field level security (to control visibility of columns)
 
   recordData = [];
   linkifiedColumns = [];

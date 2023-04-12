@@ -23,6 +23,7 @@
         <members>dynamicDataTableExt</members>
         <members>dynamicDataTableWithSearch</members>
         <members>lookupLwc</members>
+        <members>lwcUtils</members>
         <members>multiSelectLookup</members>
         <members>stencilLwc</members>
         <name>LightningComponentBundle</name>

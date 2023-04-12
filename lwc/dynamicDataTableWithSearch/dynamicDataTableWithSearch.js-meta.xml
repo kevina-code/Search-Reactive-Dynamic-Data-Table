@@ -2,9 +2,9 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>56.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>Dynamic Lightning Datatable with Search</masterLabel>
+    <masterLabel>Search-reactive Dynamic Data Table</masterLabel>
     <description
-  >Search-reactive object-agnostic dynamic lightning datatable</description>
+  >Search-reactive object-agnostic dynamic lightning data table</description>
     <targets>
       <target>lightning__RecordPage</target>
       <target>lightning__AppPage</target>
@@ -88,6 +88,13 @@
         label="Supress Bottom Bar"
         description="Optionally suppress the bottom bar that reveals the cancel and save button when a change is made to a cell"
       />
+      <property
+        name="enforceAccessibleFls"
+        type="Boolean"
+        default="false"
+        label="Enforce Accessible FLS"
+        description="Optionally enforce whether fields in the datatable are accessible through Field Level Security"
+      />
       </targetConfig>
         <targetConfig targets="lightning__FlowScreen">
           <property
@@ -155,6 +162,13 @@
         type="Boolean"
         label="Supress Bottom Bar"
         description="Optionally suppress the bottom bar that reveals the cancel and save button when a change is made to a cell"
+      />
+      <property
+        name="enforceAccessibleFls"
+        type="Boolean"
+        default="false"
+        label="Enforce Accessible FLS"
+        description="Optionally enforce whether fields in the datatable are accessible through Field Level Security"
       />
     <property
         name="recordId"
