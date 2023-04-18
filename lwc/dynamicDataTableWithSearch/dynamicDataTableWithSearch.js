@@ -19,9 +19,11 @@ export default class DynamicDataTableWithSearch extends LightningElement {
   @api actionsStr;
   @api suppressBottomBar;
   @api enforceAccessibleFls; // whether to enforce accessible field level security (to control visibility of columns)
+  @api makeColumnsReadOnly; // whether to make every column in the datatable read only, regardless of updateable FLS
 
   recordData = [];
   linkifiedColumns = [];
+  columnHeaders = [];
   selectedRows = [];
   selectedRowIds = [];
   saveDraftValues = [];
@@ -31,6 +33,7 @@ export default class DynamicDataTableWithSearch extends LightningElement {
     this.recordData = [...event.detail.searchResultRecords];
     this.linkifiedColumns = [...event.detail.linkifiedColumns];
     this.colHeaderMap = { ...event.detail.colHeaderMap };
+    this.columnHeaders = Object.keys(this.colHeaderMap);
 
     const selectedRowIdsFromThisSearch = this.selectedRows.map((row) => row.Id);
     const rowIds = this.selectedRowIds.concat(selectedRowIdsFromThisSearch);

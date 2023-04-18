@@ -18,6 +18,7 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>datatableMultiPicklist</members>
         <members>datatablePicklist</members>
         <members>dynamicDataTable</members>
         <members>dynamicDataTableExt</members>
@@ -25,7 +26,6 @@
         <members>lookupLwc</members>
         <members>lwcUtils</members>
         <members>multiSelectLookup</members>
-        <members>stencilLwc</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>

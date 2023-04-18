@@ -70,17 +70,17 @@
         description="Optionally enter where clause to filter records. Do not include 'WHERE' in this field."
       />
     <property
-        name="hideCheckboxColumn"
-        type="Boolean"
-        label="Hide Checkbox Column"
-        description="Optionally hide the checkbox column in the data table"
-      />
-    <property
         name="actionsStr"
         type="String"
         label="Actions"
         placeholder="Ex: view, edit, delete"
         description="Optionally enter row actions to be added to the table"
+      />
+      <property
+        name="hideCheckboxColumn"
+        type="Boolean"
+        label="Hide Checkbox Column"
+        description="Optionally hide the checkbox column in the data table"
       />
     <property
         name="suppressBottomBar"
@@ -94,6 +94,13 @@
         default="false"
         label="Enforce Accessible FLS"
         description="Optionally enforce whether fields in the datatable are accessible through Field Level Security"
+      />
+      <property
+        name="makeColumnsReadOnly"
+        type="Boolean"
+        default="false"
+        label="Make datatable columns read only"
+        description="Make every visible column in the datatable read only"
       />
       </targetConfig>
         <targetConfig targets="lightning__FlowScreen">
@@ -144,18 +151,18 @@
         placeholder="Examples: AccountId = :recordId; Name LIKE '%ABC%'; etc..."
         description="Optionally enter where clause to filter records. Do not include 'WHERE' in this field."
       />
-      <property
-        name="hideCheckboxColumn"
-        type="Boolean"
-        label="Hide Checkbox Column"
-        description="Optionally hide the checkbox column in the data table"
-      />
     <property
         name="actionsStr"
         type="String"
         label="Actions"
         placeholder="Ex: view, edit, delete"
         description="Optionally enter row actions to be added to the table"
+      />
+      <property
+        name="hideCheckboxColumn"
+        type="Boolean"
+        label="Hide Checkbox Column"
+        description="Optionally hide the checkbox column in the data table"
       />
       <property
         name="suppressBottomBar"
@@ -169,6 +176,13 @@
         default="false"
         label="Enforce Accessible FLS"
         description="Optionally enforce whether fields in the datatable are accessible through Field Level Security"
+      />
+      <property
+        name="makeColumnsReadOnly"
+        type="Boolean"
+        default="false"
+        label="Make datatable columns read only"
+        description="Make every visible column in the datatable read only"
       />
     <property
         name="recordId"

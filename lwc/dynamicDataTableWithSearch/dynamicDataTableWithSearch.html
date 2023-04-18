@@ -21,13 +21,16 @@
         <c-dynamic-data-table
           obj-api-name={objApiName}
           field-paths={fieldPaths}
-          hide-checkbox-column={hideCheckboxColumn}
           actions-str={actionsStr}
+          hide-checkbox-column={hideCheckboxColumn}
           suppress-bottom-bar={suppressBottomBar}
+          enforce-accessible-fls={enforceAccessibleFls}
+          make-columns-read-only={makeColumnsReadOnly}
           record-data={recordData}
           selected-row-ids={selectedRowIds}
           col-header-map={colHeaderMap}
           linkified-columns={linkifiedColumns}
+          column-headers={columnHeaders}
           onrowstoggled={handleRowsToggled}
         >
         </c-dynamic-data-table>
